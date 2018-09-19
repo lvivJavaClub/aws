@@ -1,0 +1,5 @@
+rootProject.name = 'javaClub-lambda-root'
+
+include 'common', 'aws-lambda'
+
+enableFeaturePreview('IMPROVED_POM_SUPPORT')
