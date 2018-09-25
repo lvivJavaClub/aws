@@ -1,6 +1,11 @@
 package com.lohika.jclub.aws;
 
+import com.amazonaws.services.lambda.runtime.Context;
+import com.amazonaws.services.lambda.runtime.RequestHandler;
+
 public class Main {
-    public static void main(String[] args) {
+
+    public String handleRequest2(Integer myCount, Context context) {
+        return String.valueOf(myCount);
     }
 }

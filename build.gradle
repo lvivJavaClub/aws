@@ -4,7 +4,7 @@ buildscript {
 	}
 }
 
-group = 'com.twilio.messaging'
+group = 'com.lohika.lvivjavaclub'
 version = '0.0.1-SNAPSHOT'
 
 subprojects {

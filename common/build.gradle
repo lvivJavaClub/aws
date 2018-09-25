@@ -22,15 +22,6 @@ repositories {
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
-ext {
-    awsSdkPreviewVersion = '2.0.0-preview-12'
-}
-
 dependencies {
-    compile 'software.amazon.awssdk:bom:2.0.1'
-    compile 'software.amazon.awssdk:dynamodb'
-
-    compile "software.amazon.awssdk:s3:${awsSdkPreviewVersion}"
-    compile "software.amazon.awssdk:lambda:${awsSdkPreviewVersion}"
 }
 
