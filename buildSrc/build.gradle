@@ -1,0 +1,16 @@
+plugins {
+    id 'groovy'
+    id 'idea'
+}
+
+repositories {
+    jcenter()
+}
+
+dependencies {
+    compile gradleApi()
+    compile localGroovy()
+    compile group: 'com.amazonaws', name: 'aws-java-sdk-core', version: '1.11.370'
+    compile group: 'com.amazonaws', name: 'aws-java-sdk-lambda', version: '1.11.370'
+    compile group: 'com.amazonaws', name: 'aws-java-sdk-s3', version: '1.11.370'
+}
