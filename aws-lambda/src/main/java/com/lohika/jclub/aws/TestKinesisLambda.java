@@ -20,7 +20,7 @@ import java.util.Map;
 //import software.amazon.awssdk.services.kinesis.model.PutRecordResponse;
 
 @Slf4j
-public class KinesisLambda {
+public class TestKinesisLambda {
     private LambdaLogger logger;
     final private AmazonKinesis kinesisClient = AmazonKinesisClientBuilder.standard().withRegion(Regions.EU_CENTRAL_1.getName()).build(); //defaultClient();
 
@@ -41,8 +41,8 @@ public class KinesisLambda {
 //
 //            KinesisAsyncClient client = KinesisAsyncClient.builder()
 //                    .credentialsProvider(StaticCredentialsProvider.create(AwsBasicCredentials.create(
-//                            "AKIAIAJKZWL25LAM2NPQ",
-//                            "9cTo757Bkjkt2EnJOlccI19oBNZ8e7LMIWB3GxzH"
+//                            "<AK_ID>",
+//                            "<SEC_K>"
 //                    )))
 //                    .region(Region.EU_CENTRAL_1)
 //                    .build();
