@@ -22,7 +22,7 @@ class LambdaDeployPlugin implements Plugin<Project> {
                 def jar = new File(Paths.get(project.lambdaBinaryDir, "${project.name}.jar").toString())
                 def key = "java_club_lambda/0.1.jar"
 
-                println "=====" + jar
+                println "Deploying ${jar} to ${project.lambdaS3BucketName} bucket for ${project.lambdaName} lambda function"
 
                 def zip = new PutObjectRequest(project.lambdaS3BucketName, key, jar)
 

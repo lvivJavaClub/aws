@@ -29,8 +29,11 @@ targetCompatibility = 1.8
 ext {
     awsSdkPreviewVersion = '2.0.0-preview-12'
     lambdaBinaryDir = "${project.buildDir}/libs"
-    lambdaName = "javaClubEntryPoint"
     lambdaS3BucketName = "java-club-lambda"
+}
+
+if(!hasProperty('lambdaName')) {
+    ext.lambdaName = "javaClubEntryPoint"
 }
 
 dependencies {
@@ -44,6 +47,8 @@ dependencies {
 
     compile 'com.amazonaws:aws-lambda-java-core:1.2.0'
     compile 'com.amazonaws:aws-lambda-java-log4j:1.0.0'
+    compile 'com.amazonaws:aws-lambda-java-events:2.2.2'
+    compile 'com.amazonaws:amazon-kinesis-deaggregator:1.0.3'
 
     compile 'org.slf4j:slf4j-api:1.7.25'
     compile 'org.slf4j:jcl-over-slf4j:1.7.25'
