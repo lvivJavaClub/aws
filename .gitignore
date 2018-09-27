@@ -1,8 +1,20 @@
-.idea
 .gradle
 build
-out
-.DS_Store
-jmeter.log
-*.jar
+!gradle/wrapper/gradle-wrapper.jar
+
+/out
+
+### IntelliJ IDEA ###
+.idea
+*.iws
 *.iml
+*.ipr
+classes
+.DS_Store
+
+### Logs ###
+logs/
+*.log
+
+# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
+hs_err_pid*
