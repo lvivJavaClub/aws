@@ -13,13 +13,14 @@
     ```
     gradle clean jarFat
     ``` 
-1. Upload fat jar to s3 and update lambda function code:
+1. Upload fat jar to s3 and update lambda functions code:
     ```
-    gradle deployLambda
+    gradle deployLambdas
     ```
-    By default, lambda name is `javaClubEntryPoint`. You may specify lambda name explicitly:
+    
+    Default list of lambda functions can be found in the [build.gradle](build.gradle). You may specify list of lambdas explicitly:
     ```
-    gradle -PlambdaName=<other_lambda_name> deployLambda
+    gradle -PlambdaNames=<lambda_name1>[,<lambda_name2>][,<lambda_name3>] deployLambda
     ``` 
 
 ## High Level Architecture

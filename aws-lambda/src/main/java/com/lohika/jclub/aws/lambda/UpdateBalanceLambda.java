@@ -23,9 +23,11 @@ public class UpdateBalanceLambda implements RequestHandler<KinesisEvent, Void> {
             .withRegion(Regions.EU_CENTRAL_1)
             .build();
 
-    final private DynamoDB dynamoDB = new DynamoDB(dynamoClient);
-    final private Table vehiclesTable = dynamoDB.getTable("java_club_vehicles");
-    DynamoDBMapper mapper = new DynamoDBMapper(dynamoClient);
+    private final DynamoDB dynamoDB = new DynamoDB(dynamoClient);
+    private final Table vehiclesTable = dynamoDB.getTable("java_club_vehicles");
+
+    // https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DynamoDBMapper.html
+    private final DynamoDBMapper mapper = new DynamoDBMapper(dynamoClient);
 
     @Override
     public Void handleRequest(KinesisEvent event, Context context) {
@@ -50,6 +52,7 @@ public class UpdateBalanceLambda implements RequestHandler<KinesisEvent, Void> {
 
             UpdateItemSpec updateItemSpec = new UpdateItemSpec()
                     .withPrimaryKey(new PrimaryKey("vrn", eventItem.get("vrn")))
+                    // https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.UpdateExpressions.html#Expressions.UpdateExpressions.ADD
                     .withUpdateExpression("ADD deposit :depo")
                     .withValueMap(new ValueMap().withNumber(":depo", -vehicle.getPlan().getPerEntranceWithdrawalAmount()))
                     .withReturnValues(ReturnValue.UPDATED_NEW);

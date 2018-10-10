@@ -32,8 +32,8 @@ public class InboundEventLambda {
             .withRegion(Regions.EU_CENTRAL_1)
             .build();
 
-    final private DynamoDB dynamoDB = new DynamoDB(dynamoClient);
-    final private Table vehiclesTable = dynamoDB.getTable("java_club_vehicles");
+    private final DynamoDB dynamoDB = new DynamoDB(dynamoClient);
+    private final Table vehiclesTable = dynamoDB.getTable("java_club_vehicles");
 
     private static final ObjectMapper objectMapper = new ObjectMapper();
 
