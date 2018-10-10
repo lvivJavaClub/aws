@@ -28,12 +28,14 @@ targetCompatibility = 1.8
 
 ext {
     awsSdkPreviewVersion = '2.0.0-preview-12'
-    lambdaBinaryDir = "${project.buildDir}/libs"
+    lambdaJarDir = "${project.buildDir}/libs"
     lambdaS3BucketName = "java-club-lambda"
 }
 
-if(!hasProperty('lambdaName')) {
-    ext.lambdaName = "javaClubEntryPoint"
+if(!hasProperty('lambdas')) {
+    ext.lambdaNames = ['javaClubEntryPoint', 'handle_kinesis', 'javaClubUpdateBalance2']
+} else {
+    ext.lambdaNames = getProperty('lambdas').split(',')
 }
 
 dependencies {
@@ -42,7 +44,7 @@ dependencies {
 
     compile "software.amazon.awssdk:s3:${awsSdkPreviewVersion}"
     compile "software.amazon.awssdk:lambda:${awsSdkPreviewVersion}"
-    //compile 'software.amazon.awssdk:kinesis:2.0.2'
+    compile 'software.amazon.awssdk:kinesis:2.0.6'
     compile 'com.amazonaws:aws-java-sdk-kinesis:1.11.413'
 
     compile 'com.amazonaws:aws-lambda-java-core:1.2.0'

@@ -13,31 +13,40 @@ class LambdaDeployPlugin implements Plugin<Project> {
     @Override
     void apply(Project project) {
 
-        project.task('deployLambda') {
-
+        project.task('deployLambdas') {
             group = 'AWS Lambda Provisioning'
             description = 'AWS Lambda Function Deployment Task'
 
             doLast {
-                def jar = new File(Paths.get(project.lambdaBinaryDir, "${project.name}.jar").toString())
-                def key = "java_club_lambda/0.1.jar"
+                def s3key = "java_club_lambda/0.1.jar"
 
-                println "Deploying ${jar} to ${project.lambdaS3BucketName} bucket for ${project.lambdaName} lambda function"
+                def jar = new File(Paths.get(project.lambdaJarDir, "${project.name}.jar").toString())
+                uploadJarToS3(jar, project.lambdaS3BucketName, s3key)
 
-                def zip = new PutObjectRequest(project.lambdaS3BucketName, key, jar)
+                project.lambdaNames.each {
+                    updateLambda(project.lambdaS3BucketName, s3key, it)
+                }
 
-                def s3Client = new AmazonS3ClientBuilder().withRegion(Regions.EU_CENTRAL_1).build()
-                s3Client.putObject zip
-
-                def request = new UpdateFunctionCodeRequest()
-                        .withFunctionName(project.lambdaName)
-                        .withS3Bucket(project.lambdaS3BucketName)
-                        .withS3Key(key)
-
-                def lambdaClient = new AWSLambdaClientBuilder().withRegion(Regions.EU_CENTRAL_1).build()
-                lambdaClient.updateFunctionCode request
             }
         }
     }
 
+    def uploadJarToS3(jar, lambdaS3BucketName, s3key) {
+        println "Deploying ${jar} to ${lambdaS3BucketName} bucket"
+        def zip = new PutObjectRequest(lambdaS3BucketName, s3key, jar)
+
+        def s3Client = new AmazonS3ClientBuilder().withRegion(Regions.EU_CENTRAL_1).build()
+        s3Client.putObject zip
+    }
+
+    def updateLambda(lambdaS3BucketName, s3key, lambdaName) {
+        println "Reloading ${lambdaName} lambda function"
+        def request = new UpdateFunctionCodeRequest()
+                .withFunctionName(lambdaName)
+                .withS3Bucket(lambdaS3BucketName)
+                .withS3Key(s3key)
+
+        def lambdaClient = new AWSLambdaClientBuilder().withRegion(Regions.EU_CENTRAL_1).build()
+        lambdaClient.updateFunctionCode request
+    }
 }
