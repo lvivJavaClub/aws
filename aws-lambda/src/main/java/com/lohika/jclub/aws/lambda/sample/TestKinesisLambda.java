@@ -1,4 +1,4 @@
-package com.lohika.jclub.aws;
+package com.lohika.jclub.aws.lambda.sample;
 
 import com.amazonaws.regions.Region;
 import com.amazonaws.regions.Regions;
