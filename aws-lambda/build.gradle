@@ -33,7 +33,7 @@ ext {
 }
 
 if(!hasProperty('lambdas')) {
-    ext.lambdaNames = ['javaClubEntryPoint', 'handle_kinesis', 'javaClubUpdateBalance']
+    ext.lambdaNames = ['javaClubEntryPoint', 'handle_kinesis', 'javaClubUpdateBalance', 'javaClubScheduledWithdrawal', 'javaClubSpamSender']
 } else {
     ext.lambdaNames = getProperty('lambdas').split(',')
 }
@@ -55,6 +55,14 @@ dependencies {
     compile 'org.slf4j:slf4j-api:1.7.25'
     compile 'org.slf4j:jcl-over-slf4j:1.7.25'
     compile 'org.slf4j:slf4j-log4j12:1.7.25'
+
+
+//    compile 'software.amazon.awssdk:sns:2.0.0-preview-12'
+    compile 'com.amazonaws:aws-java-sdk-sns:1.11.426'
+
+    compile 'software.amazon.awssdk:rekognition:2.0.0-preview-12'
+    compile group: 'com.amazonaws', name: 'aws-java-sdk-rekognition', version: '1.11.430'
+
 
     testCompile 'junit:junit:4.12'
 }
