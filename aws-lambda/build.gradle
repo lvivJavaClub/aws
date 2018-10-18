@@ -33,7 +33,7 @@ ext {
 }
 
 if(!hasProperty('lambdas')) {
-    ext.lambdaNames = ['javaClubEntryPoint', 'handle_kinesis', 'javaClubUpdateBalance', 'javaClubScheduledWithdrawal', 'javaClubSpamSender']
+    ext.lambdaNames = ['javaClubEntryPoint', 'handle_kinesis', 'javaClubUpdateBalance', 'javaClubScheduledWithdrawal', 'javaClubSpamSender', 'rekognitionText']
 } else {
     ext.lambdaNames = getProperty('lambdas').split(',')
 }
